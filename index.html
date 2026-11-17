@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>استبيان الفرض</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef1f5;--card:#fff;--tx:#1a2233;--mut:#5d687c;--navy:#17294d;--navy2:#22407a;--gold:#a8832c;--bd:#cfd6e2;--ok:#17703a;--okb:#e4f3ea;--no:#a52a1f;--nob:#fbe9e7;--sel:#e7edf9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f141d;--card:#18202d;--tx:#e9edf4;--mut:#9aa6ba;--navy:#0c1730;--navy2:#8fa9e6;--gold:#d2ad55;--bd:#2f3a4e;--ok:#6fd49a;--okb:#12301f;--no:#ff9a90;--nob:#3a1b18;--sel:#1f2c47}}
+:root[data-theme="dark"]{--bg:#0f141d;--card:#18202d;--tx:#e9edf4;--mut:#9aa6ba;--navy:#0c1730;--navy2:#8fa9e6;--gold:#d2ad55;--bd:#2f3a4e;--ok:#6fd49a;--okb:#12301f;--no:#ff9a90;--nob:#3a1b18;--sel:#1f2c47}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 16px/1.8 "IBM Plex Sans Arabic",Tahoma,Arial,sans-serif}
+header{background:var(--navy);color:#fff;border-bottom:4px solid var(--gold);padding:18px 16px;text-align:center}
+header small{display:block;color:#c9d3ea;font-size:13px}
+header h1{font:700 26px/1.5 Amiri,"Times New Roman",serif;margin:2px 0}
+main{max-width:680px;margin:0 auto;padding:18px 14px 40px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:6px;padding:22px;margin-bottom:16px}
+.card h2{font:700 21px/1.6 Amiri,serif;margin:0 0 6px;color:var(--navy2)}
+.mut{color:var(--mut);font-size:14px}
+.q{font-weight:600;margin:20px 0 4px}
+input[type=text]{font:inherit;width:100%;padding:11px 12px;border:1px solid var(--bd);border-radius:5px;background:var(--bg);color:var(--tx)}
+input:focus,button:focus-visible{outline:2px solid var(--navy2);outline-offset:2px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--navy);color:#fff;border:0;border-radius:5px;padding:12px 24px;font-weight:600;width:100%;margin-top:14px}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.alt{background:transparent;color:var(--navy2);border:1px solid var(--navy2)}
+.opt{display:flex;gap:10px;align-items:center;width:100%;text-align:start;background:var(--card);color:var(--tx);border:1.5px solid var(--bd);border-radius:5px;padding:11px 14px;margin:8px 0;font-size:17px}
+.opt .mk{flex:none;width:20px;height:20px;border:2px solid var(--mut);border-radius:50%}
+.opt.s{background:var(--sel);border-color:var(--navy2)}.opt.s .mk{background:var(--navy2);border-color:var(--navy2)}
+.warn{background:var(--nob);border:1px solid var(--no);color:var(--no);border-radius:5px;padding:10px 14px;margin-bottom:14px;font-size:14.5px}
+.thanks{background:var(--okb);border:1px solid var(--ok);color:var(--ok);border-radius:5px;padding:12px 14px;margin-bottom:14px;font-weight:600}
+.row{margin:14px 0}
+.row .top{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-weight:500}
+.bar{height:14px;background:var(--bd);border-radius:3px;overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;background:var(--navy2);transition:width .5s}
+.row.top1 .bar i{background:var(--gold)}
+.row.top1 .top b{color:var(--gold)}
+.rq{font:700 18px/1.6 Amiri,serif;margin:22px 0 2px;color:var(--navy2)}
+.note{border:1px solid var(--gold);border-inline-start-width:5px;background:var(--bg);border-radius:4px;padding:10px 14px;margin:14px 0 0;font-size:14.5px}
+.hide{display:none}
+</style>
+</head>
+<body>
+<header>
+  <small>المدرسة العليا للأساتذة - ملحقة الوادي</small>
+  <h1>استبيان: الفرض</h1>
+  <small>المقياس: الأعمال الموجهة (TD) فيزياء 1</small>
+  <small>الأستاذ: أنس عبد الصمد بوطهرة</small>
+</header>
+<main>
+<div id="warn" class="warn hide">لم يُضبط رابط الجدول (SHEET_URL) بعد، لن تُسجَّل الإجابات.</div>
+
+<section id="formCard" class="card hide">
+  <h2>أجب عن الأسئلة التالية</h2>
+  <div class="mut">يستمر الاستبيان إلى نهاية يوم <b id="dl"></b>. لا تظهر النتائج للطلبة، وسيعلنها الأستاذ بعد انتهاء المدة.</div>
+
+  <div class="q">الاسم واللقب <span style="color:var(--no)">*</span></div>
+  <input type="text" id="name" autocomplete="name" maxlength="80">
+
+  <div class="q">الفوج <span style="color:var(--no)">*</span></div>
+  <div id="grp"></div>
+
+  <div class="q">1) هل تفضل أن تجتاز فرضًا واحدًا أم فرضين؟ <span style="color:var(--no)">*</span></div>
+  <div id="q1"></div>
+
+  <div class="q">2) هل تفضل أن يكون الفرض الأول (إن كانت النتيجة فرضين) أو الفرض الوحيد (إن كانت النتيجة فرضًا واحدًا) في الأسبوع القادم أم الذي بعده؟ <span style="color:var(--no)">*</span></div>
+  <div id="q2"></div>
+
+  <div class="q">3) هل تفضل أن يكون يوم الفرض يوم الأحد أم الاثنين؟ <span style="color:var(--no)">*</span></div>
+  <div id="q3"></div>
+
+  <button class="btn" id="send" disabled>إرسال إجابتي</button>
+  <div class="mut" style="margin-top:12px">يظهر اسمك للأستاذ فقط. إن أعدت الإرسال بالاسم نفسه قبل انتهاء المدة تُحتسب آخر إجابة لك.</div>
+</section>
+
+<section id="thxCard" class="card hide">
+  <div class="thanks">✓ تم تسجيل إجابتك، شكرًا لك.</div>
+  <div class="mut">لا تُعرض النتائج بعد الإرسال. سيعلن الأستاذ النتيجة النهائية بعد انتهاء مدة الاستبيان. يمكنك تعديل إجابتك قبل انتهاء المدة بإعادة الإرسال بالاسم نفسه.</div>
+  <button class="btn alt" id="again">تعديل إجابتي</button>
+</section>
+
+<section id="closedCard" class="card hide">
+  <h2>أُغلق الاستبيان</h2>
+  <div class="mut">انتهت مدة الاستبيان، وسيعلن الأستاذ النتيجة قريبًا.</div>
+  <button class="btn alt" id="recheck">تحديث</button>
+</section>
+
+<section id="resCard" class="card hide">
+  <div class="thanks">🔒 أُغلق الاستبيان وأُعلنت النتائج.</div>
+  <div class="mut" id="tot"></div>
+  <div id="bars"></div>
+  <div id="msg" class="note hide"></div>
+</section>
+</main>
+<script>
+const SHEET_URL="https://script.google.com/macros/s/AKfycbxdmSQjawCrX_Vr5zzLHXMdHnz6eqSQKy9CRDuzV_FjqU42msQpoPoA7whAik542AkG/exec"; // رابط تطبيق الويب (ينتهي بـ /exec)
+const DEADLINE=new Date("2026-11-20T23:59:59+01:00"); // نهاية اليوم الثالث بتوقيت الجزائر
+const GROUPS=[["1","الفوج الأول"],["2","الفوج الثاني"]];
+const Q=[
+ {id:"q1",title:"عدد الفروض",opts:[["1","فرض واحد"],["2","فرضان"]]},
+ {id:"q2",title:"موعد الفرض (الأول أو الوحيد)",opts:[["w1","الأسبوع القادم","الأحد 22 / الاثنين 23 نوفمبر"],["w2","الأسبوع الذي بعده","الأحد 29 / الاثنين 30 نوفمبر"]]},
+ {id:"q3",title:"يوم الفرض",opts:[["sun","الأحد"],["mon","الاثنين"]]}
+];
+const $=id=>document.getElementById(id);
+const ans={grp:"",q1:"",q2:"",q3:""};
+if(!SHEET_URL||SHEET_URL.startsWith("PASTE"))$("warn").classList.remove("hide");
+$("dl").textContent="الجمعة 20 نوفمبر 2026";
+
+function build(box,items,key){
+  items.forEach(it=>{
+    const b=document.createElement("button");b.type="button";b.className="opt";
+    b.innerHTML="<span class='mk'></span><span></span>";
+    b.children[1].textContent=it[1]+(it[2]?" ("+it[2]+")":"");b.dataset.k=it[0];
+    b.onclick=()=>{ans[key]=it[0];[...box.children].forEach(c=>c.classList.toggle("s",c===b));check()};
+    box.appendChild(b);
+  });
+}
+build($("grp"),GROUPS,"grp");
+Q.forEach(q=>build($(q.id),q.opts,q.id));
+function check(){$("send").disabled=!($("name").value.trim().length>=3&&ans.grp&&ans.q1&&ans.q2&&ans.q3)}
+$("name").oninput=check;
+
+function show(c){["form","thx","closed","res"].forEach(k=>$(k+"Card").classList.toggle("hide",k!==c))}
+
+function draw(d){
+  const total=d.total||0;
+  $("tot").textContent="عدد المشاركين: "+total;
+  let ties=false;
+  $("bars").innerHTML=Q.map(q=>{
+    const cs=d.counts&&d.counts[q.id]||{};
+    const max=Math.max(0,...q.opts.map(o=>cs[o[0]]||0));
+    if(max>0&&q.opts.filter(o=>(cs[o[0]]||0)===max).length>1)ties=true;
+    return "<div class='rq'>"+q.title+"</div>"+q.opts.map(o=>{
+      const c=cs[o[0]]||0,p=total?Math.round(c/total*100):0,top=max>0&&c===max;
+      return "<div class='row"+(top?" top1":"")+"'><div class='top'><span>"+o[1]+(o[2]?" <bdi dir='rtl'>("+o[2]+")</bdi>":"")+(top?" <b>★ الأكثر اختيارًا</b>":"")+"</span><span><bdi dir='ltr'>"+c+" ("+p+"%)</bdi></span></div><div class='bar'><i style='width:"+p+"%'></i></div></div>";
+    }).join("");
+  }).join("");
+  if(ties){$("msg").textContent="يوجد تعادل في بعض الأسئلة، وسيحسمه الأستاذ ويعلن القرار النهائي.";$("msg").classList.remove("hide")}
+  else $("msg").classList.add("hide");
+}
+
+async function status(){
+  const r=await fetch(SHEET_URL+"?action=status&t="+Date.now());
+  return r.json();
+}
+async function init(){
+  const noUrl=!SHEET_URL||SHEET_URL.startsWith("PASTE");
+  if(noUrl){show(Date.now()>DEADLINE?"closed":"form");return}
+  try{
+    const d=await status();
+    if(d.announced){draw(d);show("res")}
+    else if(d.closed)show("closed");
+    else show("form");
+  }catch(e){show(Date.now()>DEADLINE?"closed":"form")}
+}
+$("send").onclick=async()=>{
+  if(!SHEET_URL||SHEET_URL.startsWith("PASTE"))return;
+  if(Date.now()>DEADLINE){show("closed");return}
+  $("send").disabled=true;$("send").textContent="جارٍ الإرسال…";
+  try{
+    await fetch(SHEET_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({type:"exam",name:$("name").value.trim(),group:ans.grp,q1:ans.q1,q2:ans.q2,q3:ans.q3})});
+    show("thx");
+  }catch(e){
+    alert("تعذّر الإرسال، تأكد من اتصالك بالإنترنت وأعد المحاولة.");
+  }
+  $("send").textContent="إرسال إجابتي";check();
+};
+$("again").onclick=()=>show("form");
+$("recheck").onclick=init;
+init();
+</script>
+</body>
+</html>
