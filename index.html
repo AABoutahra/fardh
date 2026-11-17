@@ -40,6 +40,8 @@ button{font:inherit;cursor:pointer}
 .row.top1 .top b{color:var(--gold)}
 .rq{font:700 18px/1.6 Amiri,serif;margin:22px 0 2px;color:var(--navy2)}
 .note{border:1px solid var(--gold);border-inline-start-width:5px;background:var(--bg);border-radius:4px;padding:10px 14px;margin:14px 0 0;font-size:14.5px}
+.alert{background:var(--sel);border:2px solid var(--gold);border-inline-start-width:8px;border-radius:6px;padding:12px 16px;margin:14px 0 4px;font-size:17px;line-height:2;color:var(--tx)}
+.alert b{color:var(--gold);font-weight:700}
 .hide{display:none}
 </style>
 </head>
@@ -55,7 +57,10 @@ button{font:inherit;cursor:pointer}
 
 <section id="formCard" class="card hide">
   <h2>أجب عن الأسئلة التالية</h2>
-  <div class="mut">يستمر الاستبيان إلى نهاية يوم <b id="dl"></b>. لا تظهر النتائج للطلبة، وسيعلنها الأستاذ بعد انتهاء المدة.</div>
+  <div class="alert">
+    <div>⏳ يستمر الاستبيان إلى نهاية يوم <b>الجمعة 20 نوفمبر 2026</b> على الساعة <b><bdi dir="ltr">00:00</bdi></b></div>
+    <div>📢 ثم ستُعلن النتيجة يوم <b>السبت 21 نوفمبر</b> على الساعة <b><bdi dir="ltr">08:00</bdi></b> صباحًا</div>
+  </div>
 
   <div class="q">الاسم واللقب <span style="color:var(--no)">*</span></div>
   <input type="text" id="name" autocomplete="name" maxlength="80">
@@ -78,13 +83,16 @@ button{font:inherit;cursor:pointer}
 
 <section id="thxCard" class="card hide">
   <div class="thanks">✓ تم تسجيل إجابتك، شكرًا لك.</div>
-  <div class="mut">لا تُعرض النتائج بعد الإرسال. سيعلن الأستاذ النتيجة النهائية بعد انتهاء مدة الاستبيان. يمكنك تعديل إجابتك قبل انتهاء المدة بإعادة الإرسال بالاسم نفسه.</div>
+  <div class="alert">
+    <div>📢 سيتم إعلان النتيجة النهائية يوم <b>السبت 21 نوفمبر</b> على الساعة <b><bdi dir="ltr">08:00</bdi></b> صباحًا.</div>
+    <div>✏️ يمكنك تعديل إجابتك قبل انتهاء المدة بإعادة الإرسال بالاسم نفسه.</div>
+  </div>
   <button class="btn alt" id="again">تعديل إجابتي</button>
 </section>
 
 <section id="closedCard" class="card hide">
   <h2>أُغلق الاستبيان</h2>
-  <div class="mut">انتهت مدة الاستبيان، وسيعلن الأستاذ النتيجة قريبًا.</div>
+  <div class="alert">📢 انتهت مدة الاستبيان. ستُعلن النتيجة يوم <b>السبت 21 نوفمبر</b> على الساعة <b><bdi dir="ltr">08:00</bdi></b> صباحًا.</div>
   <button class="btn alt" id="recheck">تحديث</button>
 </section>
 
@@ -96,8 +104,8 @@ button{font:inherit;cursor:pointer}
 </section>
 </main>
 <script>
-const SHEET_URL="https://script.google.com/macros/s/AKfycbxdmSQjawCrX_Vr5zzLHXMdHnz6eqSQKy9CRDuzV_FjqU42msQpoPoA7whAik542AkG/exec"; // رابط تطبيق الويب (ينتهي بـ /exec)
-const DEADLINE=new Date("2026-11-20T23:59:59+01:00"); // نهاية اليوم الثالث بتوقيت الجزائر
+const SHEET_URL="PASTE_YOUR_WEB_APP_URL_HERE"; // رابط تطبيق الويب (ينتهي بـ /exec)
+const DEADLINE=new Date("2026-11-21T00:00:00+01:00"); // نهاية يوم الجمعة 20 نوفمبر (الساعة 00:00) بتوقيت الجزائر
 const GROUPS=[["1","الفوج الأول"],["2","الفوج الثاني"]];
 const Q=[
  {id:"q1",title:"عدد الفروض",opts:[["1","فرض واحد"],["2","فرضان"]]},
@@ -107,7 +115,6 @@ const Q=[
 const $=id=>document.getElementById(id);
 const ans={grp:"",q1:"",q2:"",q3:""};
 if(!SHEET_URL||SHEET_URL.startsWith("PASTE"))$("warn").classList.remove("hide");
-$("dl").textContent="الجمعة 20 نوفمبر 2026";
 
 function build(box,items,key){
   items.forEach(it=>{
